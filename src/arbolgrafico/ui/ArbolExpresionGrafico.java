@@ -6,6 +6,7 @@ import arbolgrafico.ArboldeExpresiones;
 import arbolgrafico.nodos.Nodo1;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.util.*;
 import javax.swing.*;
 
@@ -45,7 +46,7 @@ public class ArbolExpresionGrafico extends JPanel {
     private void calcularPosiciones() {
         posicionNodos.clear();
         subtreeSizes.clear();
-        // Nodo root = this.miArbol.getRaiz();
+
         Nodo1 root = this.miArbol.getRaiz();
         if (root != null) {
             calcularTamañoSubarbol(root);
@@ -108,12 +109,12 @@ public class ArbolExpresionGrafico extends JPanel {
             center = right - rd.width - child2child / 2;
         else if (left != Integer.MAX_VALUE)
             center = left + ld.width + child2child / 2;
-        int width = fm.stringWidth(n.getInformacion() + "");
+        int diameter = 50; // Diámetro del círculo (ajusta según sea necesario)
 
-        posicionNodos.put(n, new Rectangle(center - width / 2 - 3, top, width + 6, fm.getHeight()));
+        posicionNodos.put(n, new Ellipse2D.Double(center - diameter / 2, top, diameter, diameter));
 
-        calcularPosicion(n.getNodoIzquierdo(), Integer.MAX_VALUE, center - child2child / 2, top + fm.getHeight() + parent2child);
-        calcularPosicion(n.getNodoDerecho(), center + child2child / 2, Integer.MAX_VALUE, top + fm.getHeight() + parent2child);
+        calcularPosicion(n.getNodoIzquierdo(), Integer.MAX_VALUE, center - child2child / 2, top + diameter + parent2child);
+        calcularPosicion(n.getNodoDerecho(), center + child2child / 2, Integer.MAX_VALUE, top + diameter + parent2child);
     }
 
 
@@ -131,25 +132,21 @@ public class ArbolExpresionGrafico extends JPanel {
         if (n == null)
             return;
 
-        Rectangle r = (Rectangle) posicionNodos.get(n);
+        Ellipse2D.Double circle = (Ellipse2D.Double) posicionNodos.get(n);
         g.setColor(Color.BLUE);
         g.setStroke(new BasicStroke(2));
-        g.draw(r);
-        g.drawString(n.getInformacion() + "", r.x + 3, r.y + yoffs);
+        g.draw(circle);
+        g.setFont(new Font("Arial", Font.PLAIN, 20));
+        g.drawString(n.getInformacion() + "", (int) (circle.x + circle.width / 2) - 3, (int) (circle.y + circle.height / 2) + yoffs -10);
 
         if (puntox != Integer.MAX_VALUE)
+            g.drawLine(puntox, puntoy, (int) (circle.x + circle.width / 2), (int) (circle.y + circle.height / 20));
 
-            g.drawLine(puntox, puntoy, (int) (r.x + r.width / 2), r.y);
-
-        dibujarArbol(g, n.getNodoIzquierdo(), (int) (r.x + r.width / 2), r.y + r.height, yoffs);
-        dibujarArbol(g, n.getNodoDerecho(), (int) (r.x + r.width / 2), r.y + r.height, yoffs);
-
+        dibujarArbol(g, n.getNodoIzquierdo(), (int) (circle.x + circle.width / 2), (int) (circle.y + circle.height), yoffs);
+        dibujarArbol(g, n.getNodoDerecho(), (int) (circle.x + circle.width / 2), (int) (circle.y + circle.height), yoffs);
     }
 
-    /**
-     * Sobreescribe el metodo paint y se encarga de pintar todo el árbol.
-     * @param g: Objeto de la clase Graphics.
-     */
+
     public void paint(Graphics g) {
         super.paint(g);
         fm = g.getFontMetrics();
