@@ -3,7 +3,7 @@ package arbolgrafico.ui;
 
 
 import arbolgrafico.ArboldeExpresiones;
-import arbolgrafico.nodos.Nodo1;
+import arbolgrafico.nodos.NodoHijo;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -47,7 +47,7 @@ public class ArbolExpresionGrafico extends JPanel {
         posicionNodos.clear();
         subtreeSizes.clear();
 
-        Nodo1 root = this.miArbol.getRaiz();
+        NodoHijo root = this.miArbol.getRaiz();
         if (root != null) {
             calcularTamañoSubarbol(root);
             calcularPosicion(root, Integer.MAX_VALUE, Integer.MAX_VALUE, 0);
@@ -63,7 +63,7 @@ public class ArbolExpresionGrafico extends JPanel {
      * @return Dimension con el tamaño de cada subárbol.
      */
 
-    private Dimension calcularTamañoSubarbol(Nodo1 n) {
+    private Dimension calcularTamañoSubarbol(NodoHijo n) {
         if (n == null)
             return new Dimension(0, 0);
 
@@ -91,7 +91,7 @@ public class ArbolExpresionGrafico extends JPanel {
      * @param top: int con el tope.
      */
 
-    private void calcularPosicion(Nodo1 n, int left, int right, int top) {
+    private void calcularPosicion(NodoHijo n, int left, int right, int top) {
         if (n == null)
             return;
 
@@ -128,7 +128,7 @@ public class ArbolExpresionGrafico extends JPanel {
      * @param yoffs: int con la altura del FontMetrics.
      */
 
-    private void dibujarArbol(Graphics2D g, Nodo1 n, int puntox, int puntoy, int yoffs) {
+    private void dibujarArbol(Graphics2D g, NodoHijo n, int puntox, int puntoy, int yoffs) {
         if (n == null)
             return;
 

@@ -5,7 +5,7 @@
  */
 package arbolgrafico;
 
-import arbolgrafico.nodos.Nodo1;
+import arbolgrafico.nodos.NodoHijo;
 import arbolgrafico.ui.ArbolExpresionGrafico;
 
 import java.util.*;
@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 
 public class ArboldeExpresiones {
-    Stack<Nodo1> pOperandos = new Stack<Nodo1>();
+    Stack<NodoHijo> pOperandos = new Stack<NodoHijo>();
     Stack<String> pOperadores = new Stack<String>();
 
     final String blanco;           // Cadena de espacios en blanco
@@ -24,13 +24,13 @@ public class ArboldeExpresiones {
         operadores = ")+-*/%^(";  //acomodados por precedencia;
     }
 
-    private Nodo1 raiz;
+    private NodoHijo raiz;
 
-    public Nodo1 getRaiz() {
+    public NodoHijo getRaiz() {
         return this.raiz;
     }
 
-    public void setRaiz(Nodo1 r) {
+    public void setRaiz(NodoHijo r) {
         this.raiz = r;
     }
 
@@ -39,7 +39,7 @@ public class ArboldeExpresiones {
         return true;
     }
 
-    public Nodo1 construirArbol(String expresion) {
+    public NodoHijo construirArbol(String expresion) {
         StringTokenizer tokenizer;
         String token;
 
@@ -50,8 +50,8 @@ public class ArboldeExpresiones {
                 ;               // Es un espacio en blanco, se ignora
             else if (operadores.indexOf(token) < 0) {
                 // Es operando y lo guarda como nodo del arbol
-                Nodo1 a;
-                pOperandos.push(new Nodo1(token));
+                NodoHijo a;
+                pOperandos.push(new NodoHijo(token));
             } else if (token.equals(")")) { // Saca elementos hasta encontrar (
                 while (!pOperadores.empty() && !pOperadores.peek().equals("(")) {
                     guardarSubArbol();
@@ -72,13 +72,13 @@ public class ArboldeExpresiones {
             }
         }
 
-        raiz = (Nodo1) pOperandos.peek();
+        raiz = (NodoHijo) pOperandos.peek();
         while (!pOperadores.empty()) {
             if (pOperadores.peek().equals("(")) {
                 pOperadores.pop();
             } else {
                 guardarSubArbol();
-                raiz = (Nodo1) pOperandos.peek();
+                raiz = (NodoHijo) pOperandos.peek();
             }
         }
         return raiz;
@@ -88,9 +88,9 @@ public class ArboldeExpresiones {
      * Metodo privado para almacenar en la pila un subarbol
      */
     private void guardarSubArbol() {
-        Nodo1 op2 = (Nodo1) pOperandos.pop();
-        Nodo1 op1 = (Nodo1) pOperandos.pop();
-        pOperandos.push(new Nodo1(op2, pOperadores.pop(), op1));
+        NodoHijo op2 = (NodoHijo) pOperandos.pop();
+        NodoHijo op1 = (NodoHijo) pOperandos.pop();
+        pOperandos.push(new NodoHijo(op2, pOperadores.pop(), op1));
 
     }
 
@@ -99,7 +99,7 @@ public class ArboldeExpresiones {
      *
      * @param n -- nodo raiz
      */
-    public void imprime(Nodo1 n) {
+    public void imprime(NodoHijo n) {
         if (n != null) {
 
             imprime(n.getNodoDerecho());
@@ -115,7 +115,7 @@ public class ArboldeExpresiones {
      *
      * @param n -- nodo raiz
      */
-    public void imprimePos(Nodo1 n) {
+    public void imprimePos(NodoHijo n) {
         if (n != null) {
             imprimePos(n.getNodoIzquierdo());
             imprimePos(n.getNodoDerecho());
@@ -128,7 +128,7 @@ public class ArboldeExpresiones {
      *
      * @param n -- nodo raiz
      */
-    public void imprimePre(Nodo1 n) {
+    public void imprimePre(NodoHijo n) {
         if (n != null) {
             System.out.print(n.getInformacion() + " ");
 
@@ -150,7 +150,7 @@ public class ArboldeExpresiones {
         System.out.println("Digite la expresion aritmetica");
         String expresion = leer.nextLine();
 
-        Nodo1 raiz = expr.construirArbol(expresion);
+        NodoHijo raiz = expr.construirArbol(expresion);
         System.out.print("El arbol es ");
         expr.imprime(raiz);
         expr.imprimePre(raiz);

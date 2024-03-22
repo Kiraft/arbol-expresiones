@@ -8,28 +8,28 @@ package arbolgrafico.nodos;
 /**
  * @author ESTUDIANTES
  */
-public class Nodo1 {
+public class NodoHijo {
 
     private String informacion;
-    private Nodo1 padre;
-    private Nodo1 nodoIzquierdo;
-    private Nodo1 nodoDerecho;
+    private NodoHijo padre;
+    private NodoHijo nodoIzquierdo;
+    private NodoHijo nodoDerecho;
 
-    public Nodo1() {
+    public NodoHijo() {
         this.informacion = "";
         this.nodoIzquierdo = null;
         this.nodoDerecho = null;
         this.padre = null;
     }
 
-    public Nodo1(String informacion) {
+    public NodoHijo(String informacion) {
         this.informacion = informacion;
         this.nodoIzquierdo = null;
         this.nodoDerecho = null;
         this.padre = null;
     }
 
-    public Nodo1(Nodo1 op1, String pop, Nodo1 op2) {
+    public NodoHijo(NodoHijo op1, String pop, NodoHijo op2) {
         this.nodoDerecho = op1;
         this.informacion = pop;
         this.nodoIzquierdo = op2;
@@ -38,11 +38,11 @@ public class Nodo1 {
     }
 
 
-    public Nodo1 getPadre() {
+    public NodoHijo getPadre() {
         return padre;
     }
 
-    public void setPadre(Nodo1 padre) {
+    public void setPadre(NodoHijo padre) {
         this.padre = padre;
     }
 
@@ -54,19 +54,19 @@ public class Nodo1 {
         this.informacion = informacion;
     }
 
-    public Nodo1 getNodoIzquierdo() {
+    public NodoHijo getNodoIzquierdo() {
         return nodoIzquierdo;
     }
 
-    public void setNodoIzquierdo(Nodo1 nodoIzquierdo) {
+    public void setNodoIzquierdo(NodoHijo nodoIzquierdo) {
         this.nodoIzquierdo = nodoIzquierdo;
     }
 
-    public Nodo1 getNodoDerecho() {
+    public NodoHijo getNodoDerecho() {
         return nodoDerecho;
     }
 
-    public void setNodoDerecho(Nodo1 nodoDerecho) {
+    public void setNodoDerecho(NodoHijo nodoDerecho) {
         this.nodoDerecho = nodoDerecho;
     }
 

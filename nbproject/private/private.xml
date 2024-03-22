@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jona_/OneDrive/Escritorio/ArbolGrafico/src/arbolgrafico/ui/Gui.java</file>
+            <file>file:/C:/Users/jona_/OneDrive/Documentos/GitHub/ArbolGrafico/src/arbolgrafico/nodos/NodoHijo.java</file>
+            <file>file:/C:/Users/jona_/OneDrive/Documentos/GitHub/ArbolGrafico/src/arbolgrafico/arbol/Arbol.java</file>
+            <file>file:/C:/Users/jona_/OneDrive/Documentos/GitHub/ArbolGrafico/src/arbolgrafico/ui/Gui.java</file>
+            <file>file:/C:/Users/jona_/OneDrive/Documentos/GitHub/ArbolGrafico/src/arbolgrafico/Main.java</file>
+            <file>file:/C:/Users/jona_/OneDrive/Documentos/GitHub/ArbolGrafico/src/arbolgrafico/InitArbol.java</file>
+            <file>file:/C:/Users/jona_/OneDrive/Documentos/GitHub/ArbolGrafico/src/arbolgrafico/ui/ArbolExpresionGrafico.java</file>
+            <file>file:/C:/Users/jona_/OneDrive/Documentos/GitHub/ArbolGrafico/src/arbolgrafico/ArboldeExpresiones.java</file>
+            <file>file:/C:/Users/jona_/OneDrive/Documentos/GitHub/ArbolGrafico/src/arbolgrafico/nodos/NodoPadre.java</file>
         </group>
     </open-files>
 </project-private>

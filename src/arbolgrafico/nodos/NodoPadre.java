@@ -7,12 +7,12 @@ package arbolgrafico.nodos;
 /**
  * @author ploks
  */
-public class Nodo {
+public class NodoPadre {
 
     private int dato;
-    private Nodo izq, der;
+    private NodoPadre izq, der;
 
-    public Nodo(int dato, Nodo izq, Nodo der) {
+    public NodoPadre(int dato, NodoPadre izq, NodoPadre der) {
         this.dato = dato;
         this.izq = izq;
         this.der = der;
@@ -26,19 +26,19 @@ public class Nodo {
         this.dato = dato;
     }
 
-    public Nodo getIzq() {
+    public NodoPadre getIzq() {
         return izq;
     }
 
-    public void setIzq(Nodo izq) {
+    public void setIzq(NodoPadre izq) {
         this.izq = izq;
     }
 
-    public Nodo getDer() {
+    public NodoPadre getDer() {
         return der;
     }
 
-    public void setDer(Nodo der) {
+    public void setDer(NodoPadre der) {
         this.der = der;
     }
 

@@ -1,22 +1,22 @@
 
 package arbolgrafico.arbol;
 
-import arbolgrafico.nodos.Nodo;
+import arbolgrafico.nodos.NodoPadre;
 
 import java.util.ArrayList;
 
 public class Arbol {
 
-    private Nodo raiz;
+    private NodoPadre raiz;
     int cant;
     int altura;
 
 
-    public Nodo getRaiz() {
+    public NodoPadre getRaiz() {
         return this.raiz;
     }
 
-    public void setRaiz(Nodo r) {
+    public void setRaiz(NodoPadre r) {
         this.raiz = r;
     }
 
@@ -25,12 +25,12 @@ public class Arbol {
     }
 
     public boolean agregar(int dato) {
-        Nodo nuevo = new Nodo(dato, null, null);
+        NodoPadre nuevo = new NodoPadre(dato, null, null);
         insertar(nuevo, raiz);
         return true;
     }
 
-    public void insertar(Nodo nuevo, Nodo pivote) {
+    public void insertar(NodoPadre nuevo, NodoPadre pivote) {
         if (this.raiz == null) {
             raiz = nuevo;
         } else {
@@ -58,7 +58,7 @@ public class Arbol {
         return "" + cant;
     }
 
-    private void cantidadNodos(Nodo reco) {
+    private void cantidadNodos(NodoPadre reco) {
         if (reco != null) {
             cant++;
             cantidadNodos(reco.getIzq());
@@ -74,7 +74,7 @@ public class Arbol {
         return "" + cant;
     }
 
-    private void cantidadNodosHoja(Nodo reco) {
+    private void cantidadNodosHoja(NodoPadre reco) {
         if (reco != null) {
             if (reco.getIzq() == null && reco.getDer() == null) {
                 cant++;
@@ -91,7 +91,7 @@ public class Arbol {
         return "" + altura;
     }
 
-    private void retornarAltura(Nodo reco, int nivel) {
+    private void retornarAltura(NodoPadre reco, int nivel) {
         if (reco != null) {
             retornarAltura(reco.getIzq(), nivel + 1);
             if (nivel > altura) {
@@ -103,7 +103,7 @@ public class Arbol {
 
     //Valor menor
     public String menorValor() {
-        Nodo reco = raiz;
+        NodoPadre reco = raiz;
         if (raiz != null) {
 
             while (reco.getIzq() != null) {
@@ -115,7 +115,7 @@ public class Arbol {
 
     //mayor Valor
     public String mayorValor() {
-        Nodo reco = raiz;
+        NodoPadre reco = raiz;
         if (raiz != null) {
             while (reco.getDer() != null) {
                 reco = reco.getDer();
@@ -149,7 +149,7 @@ public class Arbol {
 
     }
 
-    public void Balance(Nodo reco, boolean lado, int i) {
+    public void Balance(NodoPadre reco, boolean lado, int i) {
 
         if (reco != null) {
 
@@ -172,12 +172,12 @@ public class Arbol {
 
     //Borrar menor
     public String borrarMenor() {
-        Nodo reco = raiz.getIzq();
+        NodoPadre reco = raiz.getIzq();
         if (raiz != null) {
             if (raiz.getIzq() == null) {
                 raiz = raiz.getDer();
             } else {
-                Nodo anterior = raiz;
+                NodoPadre anterior = raiz;
                 reco = raiz.getIzq();
                 while (reco.getIzq() != null) {
                     anterior = reco;
@@ -192,12 +192,12 @@ public class Arbol {
 
     //borrar mayor
     public String borrarMayor() {
-        Nodo reco = raiz.getIzq();
+        NodoPadre reco = raiz.getIzq();
         if (raiz != null) {
             if (raiz.getDer() == null) {
                 raiz = raiz.getIzq();
             } else {
-                Nodo anterior = raiz;
+                NodoPadre anterior = raiz;
                 reco = raiz.getDer();
                 while (reco.getDer() != null) {
                     anterior = reco;
@@ -220,7 +220,7 @@ public class Arbol {
         return altura;
     }
 
-    private void alturaArbol(Nodo pivote, int nivel) {
+    private void alturaArbol(NodoPadre pivote, int nivel) {
         if (pivote != null) {
             alturaArbol(pivote.getIzq(), nivel + 1);
             if (nivel > altura) {
@@ -241,7 +241,7 @@ public class Arbol {
         return l;
     }
 
-    public void imprimirNivel(Nodo pivote, int nivel2) {
+    public void imprimirNivel(NodoPadre pivote, int nivel2) {
         if (pivote != null) {
             niveles[nivel2] = pivote.getDato() + ", " + ((niveles[nivel2] != null) ? niveles[nivel2] : "");
             imprimirNivel(pivote.getDer(), nivel2 + 1);
@@ -256,7 +256,7 @@ public class Arbol {
         return true;
     }
 
-    private void cambiar(Nodo reco, int nivel) {
+    private void cambiar(NodoPadre reco, int nivel) {
         if (reco != null) {
             reco.setDato(reco.getDato() * 3);
             cambiar(reco.getIzq(), nivel + 1);
@@ -273,7 +273,7 @@ public class Arbol {
         return ObtenerRamamayor(this.raiz, 0, "", new ArrayList<String>());
     }
 
-    public void obtenernumeroRamas(Nodo pivote, int contador) {
+    public void obtenernumeroRamas(NodoPadre pivote, int contador) {
         if (pivote != null) {
             contador++;
             obtenernumeroRamas(pivote.getIzq(), contador);
@@ -284,7 +284,7 @@ public class Arbol {
         }
     }
 
-    public ArrayList<String> ObtenerRamamayor(Nodo pivote, int contador, String dato, ArrayList lista) {
+    public ArrayList<String> ObtenerRamamayor(NodoPadre pivote, int contador, String dato, ArrayList lista) {
         if (pivote != null) {
             dato += pivote.getDato() + ",";
             contador++;
@@ -304,13 +304,13 @@ public class Arbol {
             return 0;
         }
 
-        Nodo z = borrar(this.raiz, x);
+        NodoPadre z = borrar(this.raiz, x);
         this.setRaiz(z);
         return x;
 
     }
 
-    private Nodo borrar(Nodo r, int x) {
+    private NodoPadre borrar(NodoPadre r, int x) {
         if (r == null) {
             return null;//<--Dato no encontrado		
         }
@@ -327,7 +327,7 @@ public class Arbol {
                  *	que desea borrar. La idea del algoritmo es que el dato a borrar
                  *	se coloque en una hoja o en un nodo que no tenga una de sus ramas.
                  **/
-                Nodo cambiar = buscarMin(r.getDer());
+                NodoPadre cambiar = buscarMin(r.getDer());
                 int aux = cambiar.getDato();
                 cambiar.setDato(r.getDato());
                 r.setDato(aux);
@@ -348,7 +348,7 @@ public class Arbol {
 
     }
 
-    private boolean buscar(Nodo r, int x) {
+    private boolean buscar(NodoPadre r, int x) {
         if (r == null) {
             return (false);
         }
@@ -363,7 +363,7 @@ public class Arbol {
     }
 
     //buscar min
-    private Nodo buscarMin(Nodo r) {
+    private NodoPadre buscarMin(NodoPadre r) {
         for (; r.getIzq() != null; r = r.getIzq()) ;
         return (r);
     }
@@ -375,7 +375,7 @@ public class Arbol {
         return l;
     }
 
-    private void preOrden(Nodo reco, ArrayList l) {
+    private void preOrden(NodoPadre reco, ArrayList l) {
         if (reco != null) {
             l.add(reco.getDato() + " ");
             preOrden(reco.getIzq(), l);
@@ -390,7 +390,7 @@ public class Arbol {
         return l;
     }
 
-    private void inOrden(Nodo reco, ArrayList l) {
+    private void inOrden(NodoPadre reco, ArrayList l) {
         if (reco != null) {
             inOrden(reco.getIzq(), l);
             l.add(reco.getDato() + " ");
@@ -405,7 +405,7 @@ public class Arbol {
         return l;
     }
 
-    private void postOrden(Nodo reco, ArrayList l) {
+    private void postOrden(NodoPadre reco, ArrayList l) {
         if (reco != null) {
             postOrden(reco.getIzq(), l);
             postOrden(reco.getDer(), l);
@@ -420,7 +420,7 @@ public class Arbol {
         return l;
     }
 
-    private void impNiveles(Nodo reco, int nivel, ArrayList l) {
+    private void impNiveles(NodoPadre reco, int nivel, ArrayList l) {
         if (reco != null) {
             impNiveles(reco.getIzq(), nivel + 1, l);
             l.add(reco.getDato() + " Nivel: (" + nivel + ") ");
@@ -435,7 +435,7 @@ public class Arbol {
         return (l);
     }
 
-    private void getHojas(Nodo r, ArrayList l) {
+    private void getHojas(NodoPadre r, ArrayList l) {
         if (r != null) {
             if (this.esHoja(r)) {
                 l.add(r.getDato());
@@ -446,7 +446,7 @@ public class Arbol {
 
     }
 
-    protected boolean esHoja(Nodo x) {
+    protected boolean esHoja(NodoPadre x) {
         return (x != null && x.getIzq() == null && x.getDer() == null);
     }
 
@@ -455,21 +455,21 @@ public class Arbol {
         if (info == 0 || this.raiz == null) {
             return 0;
         }
-        Nodo x = padre(this.raiz, info);
+        NodoPadre x = padre(this.raiz, info);
         if (x == null) {
             return 0;
         }
         return (x.getDato());
     }
 
-    private Nodo padre(Nodo x, int info) {
+    private NodoPadre padre(NodoPadre x, int info) {
         if (x == null) {
             return null;
         }
         if ((x.getIzq() != null && x.getIzq().getDato() == (info)) || (x.getDer() != null && x.getDer().getDato() == (info))) {
             return (x);
         }
-        Nodo y = padre(x.getIzq(), info);
+        NodoPadre y = padre(x.getIzq(), info);
         if (y == null) {
             return (padre(x.getDer(), info));
         } else {
@@ -482,7 +482,7 @@ public class Arbol {
         podar(this.raiz);
     }
 
-    private void podar(Nodo x) {
+    private void podar(NodoPadre x) {
         if (x == null) {
             return;
         }

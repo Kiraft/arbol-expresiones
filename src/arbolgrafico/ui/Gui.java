@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 public class Gui extends javax.swing.JFrame {
 
     private InitArbol simulador = new InitArbol();
+    static public String exprecion = null;
 
     public Gui() {
         initComponents();
@@ -51,19 +52,20 @@ public class Gui extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jInternalFrame2 = new javax.swing.JInternalFrame();
         botonInsertar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 10))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 10))); // NOI18N
         jPanel2.setOpaque(false);
 
         jDesktopPane1.setOpaque(false);
 
         jInternalFrame2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jInternalFrame2.setIconifiable(true);
-        jInternalFrame2.setMaximizable(true);
         jInternalFrame2.setResizable(true);
         jInternalFrame2.setEnabled(false);
         jInternalFrame2.setFocusCycleRoot(false);
@@ -78,21 +80,51 @@ public class Gui extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
+            .addGap(0, 484, Short.MAX_VALUE)
         );
 
         jDesktopPane1.add(jInternalFrame2);
-        jInternalFrame2.setBounds(0, 0, 900, 370);
+        jInternalFrame2.setBounds(0, 0, 900, 510);
 
         botonInsertar.setBackground(new java.awt.Color(102, 102, 102));
-        botonInsertar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        botonInsertar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         botonInsertar.setForeground(new java.awt.Color(255, 255, 255));
-        botonInsertar.setText("Crear Arbol");
+        botonInsertar.setText("Infija");
         botonInsertar.setBorderPainted(false);
         botonInsertar.setFocusPainted(false);
         botonInsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonInsertarActionPerformed(evt);
+                ActionInfijo(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(102, 102, 102));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Prefija");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActionPrefijo(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(102, 102, 102));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Postfija");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActionPostfijo(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(255, 102, 102));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Limpiar Arbol");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarArbol(evt);
             }
         });
 
@@ -103,20 +135,34 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(botonInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(botonInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(19, 19, 19))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(botonInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botonInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,7 +179,7 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel2.getAccessibleContext().setAccessibleName("panel de pruebas");
@@ -142,10 +188,11 @@ public class Gui extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsertarActionPerformed
+    private void ActionInfijo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActionInfijo
+       
         try {
-            //  String dato = Integer.parseInt(JOptionPane.showInputDialog("Digite dato String para insertar:"));
             String dato = JOptionPane.showInputDialog("Ingrese su exprecion aritmetica:");
+            exprecion = dato;
             if (this.simulador.insertar(dato)) {
                 JOptionPane.showMessageDialog(null, "El dato fue insertado correctamente", " ...", 1);
                 this.inicializar(true);
@@ -156,23 +203,54 @@ public class Gui extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se pudo insertar el dato", "Intenta de nuevo...", 0);
 
         }
-    }//GEN-LAST:event_botonInsertarActionPerformed
+    }//GEN-LAST:event_ActionInfijo
+
+    private void ActionPostfijo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActionPostfijo
+        //Boton Posfijo
+        
+                try {
+            String dato = JOptionPane.showInputDialog("Ingrese su exprecion aritmetica:");
+            if (this.simulador.insertar(exprecion)) {
+                JOptionPane.showMessageDialog(null, "El dato fue insertado correctamente", " ...", 1);
+                this.inicializar(true);
+
+                complementos();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo insertar el dato", "Intenta de nuevo...", 0);
+
+        }
+    }//GEN-LAST:event_ActionPostfijo
+
+    private void ActionPrefijo(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActionPrefijo
+        //Boton Prefijo
+        try {
+            String dato = JOptionPane.showInputDialog("Ingrese su exprecion aritmetica:");
+            if (this.simulador.insertar(exprecion)) {
+                JOptionPane.showMessageDialog(null, "El dato fue insertado correctamente", " ...", 1);
+                this.inicializar(true);
+
+                complementos();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo insertar el dato", "Intenta de nuevo...", 0);
+
+        }
+    }//GEN-LAST:event_ActionPrefijo
+
+    private void LimpiarArbol(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarArbol
+        this.jDesktopPane1.removeAll();
+        Rectangle tamaño = this.jInternalFrame2.getBounds();
+        this.jInternalFrame2 = null;
+        this.jInternalFrame2 = new JInternalFrame("Representación gráfica", true);
+        this.jDesktopPane1.add(this.jInternalFrame2, JLayeredPane.DEFAULT_LAYER);
+        this.jInternalFrame2.setVisible(true);
+        this.jInternalFrame2.setBounds(tamaño);
+        this.jInternalFrame2.setEnabled(false);     
+    }//GEN-LAST:event_LimpiarArbol
 
     public void complementos() {
         this.repintarArbol();
-        /*
-        this.lblCnodos.setText("");
-        this.lblCnodos.setText(this.simulador.CantidadNodos());
-
-        this.lblChojas.setText("");
-        this.lblChojas.setText(this.simulador.CantidadHojas());
-
-        this.lblVmenor.setText("");
-        this.lblVmenor.setText(this.simulador.menorValor());
-
-        this.lblVmayor.setText("");
-        this.lblVmayor.setText(this.simulador.mayorValor());
-        */
     }
 
     private void repintarArbol() {
@@ -224,6 +302,9 @@ public class Gui extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonInsertar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JPanel jPanel2;
